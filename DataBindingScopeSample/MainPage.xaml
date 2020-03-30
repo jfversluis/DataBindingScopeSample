@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="DataBindingScopeSample.MainPage" xmlns:local="clr-namespace:DataBindingScopeSample;assembly=DataBindingScopeSample" Title="Nine-Nine">
     <!-- Scope is MainPageViewModel, therefore we can set the ItemsSource to its MyItems property -->
-    <ListView x:Name="ListOfPeople" ItemsSource="{Binding MyItems}" RowHeight="100">
+    <ListView x:Name="ListOfPeople" ItemsSource="{Binding MyItems}" RowHeight="100" ItemSelected="ListOfPeople_ItemSelected">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <!-- Here the scope is the ListModel object. That is why we can reference the Title and Image properties -->
@@ -13,15 +13,14 @@
                         <MenuItem Text="Delete" IsDestructive="True" Command="{Binding DeleteCommand}" />
                     </ImageCell.ContextActions>-->
 
-
-                    <!--<ImageCell.ContextActions>
-                        <MenuItem Text="Delete" IsDestructive="True" Command="{Binding Path=BindingContext.DeleteCommand, Source={Reference ListOfPeople}}" CommandParameter="{Binding .}" />
-                    </ImageCell.ContextActions>-->
-
-                    <!-- Alternative way since Xamarin.Forms 4.5, using RelativeSource  -->
                     <ImageCell.ContextActions>
-                        <MenuItem Text="Delete" IsDestructive="True" Command="{Binding Source={RelativeSource AncestorType={x:Type local:MainPageViewModel}}, Path=DeleteCommand}" CommandParameter="{Binding .}" />
+                        <MenuItem Text="Delete" IsDestructive="True" Command="{Binding Path=BindingContext.DeleteCommand, Source={Reference ListOfPeople}}" CommandParameter="{Binding .}" />
                     </ImageCell.ContextActions>
+
+                    <!-- Alternative way since Xamarin.Forms 4.3, using RelativeSource  -->
+                    <!--<ImageCell.ContextActions>
+                        <MenuItem Text="Delete" IsDestructive="True" Command="{Binding Source={RelativeSource AncestorType={x:Type local:MainPageViewModel}}, Path=DeleteCommand}" CommandParameter="{Binding .}" />
+                    </ImageCell.ContextActions>-->
                 </ImageCell>
             </DataTemplate>
         </ListView.ItemTemplate>
