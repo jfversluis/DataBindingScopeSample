@@ -7,7 +7,7 @@
                 <!-- Here the scope is the ListModel object. That is why we can reference the Title and Image properties -->
                 <ImageCell Text="{Binding Title}" ImageSource="{Binding Image}">
                     <!-- WARNING: NOT WORKING! -->
-                    <!-- You would expect the binding to HighFiveCommand to just work _but_ the command is a property of
+                    <!-- You would expect the binding to DeleteCommand to just work _but_ the command is a property of
                          MainPageViewModel and not ListModel. And withing the cell, we are scoped to the ListModel -->
                     <!--<ImageCell.ContextActions>
                         <MenuItem Text="Delete" IsDestructive="True" Command="{Binding DeleteCommand}" />
